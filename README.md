@@ -6,7 +6,8 @@ Slides will be added here if the talk is accepted by the committee.
 
 The talk will be about the same project as my [uRos2021 presentation](https://github.com/GregorDeCillia/pipedream/).
 However since this is not an R conference it will be less technical.
-Instead, the focus will lie on the advantages from empowering article authors to include interactive charts and tables without assistance from developers or designers.
+Instead, the focus will lie on the authors of our website articles. 
+How can they be empowered to generate interactive charts and tables without assistance from developers or designers?
 
 The presentation will include sneak-peeks for the new webpage of Statistics Austria and the [STATcube API](https://github.com/statistikat/STATcubeR/).
 
