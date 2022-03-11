@@ -1,0 +1,29 @@
+{
+  "title": "Improving user engagement with interactive charts and tables",
+  "subtitle": "A look behind the scenes",
+  "venue": {
+    "conference": "Austrian and Slovenian Statistical Days 2022",
+    "location": "TU Graz",
+    "url": "http://www.stat.tugraz.at/StatisticalDays2022/index.html",
+    "date_from": "2021-04-20",
+    "date_to": "2021-04-22"
+  },
+  "tags": ["visualize", "open data", "shiny", "highcharts", "datatables"],
+  "presenter": {
+    "first": "Gregor",
+    "last": "de Cillia",
+    "mail": "Gregor.deCillia@statistik.gv.at",
+    "company": "Statistics Austria",
+    "unit": "quality management, methodology and classifications",
+    "sub_unit": "methodology"
+  },
+  "repo": "https://github.com/GregorDeCillia/StatisticalDays2022",
+  "technologies": {
+    "highcharts": "https://www.highcharts.com/",
+    "datatables": "https://datatables.net/",
+    "shiny": "https://shiny.rstudio.com/",
+    "plumber": "https://www.rplumber.io/",
+    "STATcubeR": "https://github.com/statistikat/STATcubeR/",
+    "TYPO3": "https://typo3.org/"
+  }
+}
