@@ -6,7 +6,13 @@
     "location": "TU Graz",
     "url": "http://www.stat.tugraz.at/StatisticalDays2022/index.html",
     "date_from": "2021-04-20",
-    "date_to": "2021-04-22"
+    "date_to": "2021-04-22",
+    "presentation" : {
+      "from": "2021-04-21 15:20"
+      "to": "2021-04-21 15:40",
+      "session": "6B",
+      "room": "HS BMT"
+    }
   },
   "tags": ["visualize", "open data", "shiny", "highcharts", "datatables"],
   "presenter": {
