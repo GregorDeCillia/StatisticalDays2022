@@ -1,8 +1,14 @@
-# behind the scenes of interactive charts
+# Behind the Scenes of Interactive Charts
 
 Repo for my presentation at the [Austrian and Slovenian Statistical Days 2022](http://www.stat.tugraz.at/StatisticalDays2022/index.html) at TU Graz. 
 The abstract can be found in [`abstract.md`](abstract.md) and additional metadata is available in [`meta.json`](meta.json).
-Slides will be added here if the talk is accepted by the committee.
+
+## Slides
+
+* html: https://GregorDeCillia.github.io/StatisticalDays2022/
+* pdf: https://GregorDeCillia.github.io/StatisticalDays2022/slides.pdf
+
+## About
 
 The talk will be about the same project as my [uRos2021 presentation](https://github.com/GregorDeCillia/pipedream/).
 However since this is not an R conference it will be less technical.
