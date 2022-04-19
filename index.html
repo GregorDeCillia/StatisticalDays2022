@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Behind Interactive Charts</title>
+  <link rel="icon" href="www/favicon.png" sizes="90x90">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="www/styles.css">
+</head>
+<body>
+  <div class="reveal"><div class="slides">
+    <section id='title' >
+      <h1 class="title">Behind the Scenes of Interactive Charts</h1>
+      <h1 class="subtitle">Automating the Production of Engaging Web Components</h1>
+      <div class="presentation-info">
+        <div class="pi-item">
+          <i class="fa-solid fa-user"></i>
+          <a>Gregor de Cillia</a> from <a>Statistics Austria</a>
+        </div>
+        <div class="pi-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <a>Statistical Days 2022</a> at <a>TU Graz</a>
+        </div>
+        <div class="pi-item">
+          <i class="fa-brands fa-github"></i>
+          <a href='https://github.com/GregorDeCillia/StatisticalDays2022'>github.com/GregorDeCillia/StatisticalDays2022</a>
+        </div>
+      </div>
+    </section>
+    <section id='introduction'>
+      <h2>Introduction</h2>
+      <p>
+        At <a>Statistics Austria</a>, we are currently working towards the release of a <b>new website</b>
+which will launch in <b>June 2022</b>.
+      </p>
+      <p>
+        The new website will make a stronger use of <b>interactive charts</b> and <b>interactive tables</b> (<b>C&Ts</b>). This presentation will outline the <b>"making&nbsp;of"</b> for these web components.
+      </p>
+      <p>
+        With <b>C&Ts</b>, I am referring to web graphics or web tables, which prodive interactions like <b>tooltips</b>, <b>searching</b>, <b>zooming</b>, etc. 
+      </p>
+    </section>
+    <section>
+      <section id="past">
+        <h2>We already made our feet wet</h2>
+        <a>Statistics Austria</a> already uses <b>C&Ts</b> in some statistical products
+        <ul class="stat" style="margin-top: 30px;">
+          <li>The <a>STATatlas</a> provides interactive <b>maps</b> on various topics</li>
+          <li>The <a>economic trend monitor</a> includes interactive <b>time series</b> which are updated weekly</li>
+          <li>Publications like the <a>age pyramid</a> and the <a>material flows 2019</a> contain <b>tailor-made</b> statistical charts</li>
+        </ul>
+      </section>
+      <section id="STATatlas" data-auto-animate>
+        <p>
+          The <a href="https://www.statistik.at/atlas">STATatlas</a> provides <b>maps</b> (right) and <b>time series charts</b> (left) which are both interactive
+        </p>
+        <img data-id="STATatlas-animation" src="img/STATatlas/graz.png" class="screenshot" alt="">
+      </section>
+      <section id="STATatlas-timeseries" data-auto-animate>
+        <p>
+          <b>Hovering</b> over the timeseries on the left gives a <b>tooltip</b> with values for a specific year
+        </p>
+        <a href="https://www.statistik.at/atlas/?mapid=them_bevoelkerung_alter&layerid=layer1&sublayerid=sublayer0&languageid=1&bbox=1516321,5884841,1839496,6050557,9">
+          <img data-id="STATatlas-animation" src="img/STATatlas/tooltip.png" class="screenshot" alt="">
+        </a>
+      </section>
+      <section id="STATatlas-stubenberg" data-auto-animate>
+        <p>
+          <b>Clicking</b> on a region (right) will <b>update the timeseries</b> (left). The other two lines are parent regions of the selected region
+        </p>
+        <img data-id="STATatlas-animation" src="img/STATatlas/stubenberg.png" class="screenshot" alt="">
+      </section>
+      <section id="STATatlas-migration" data-auto-animate>
+        <p>
+          It is also possible to switch the shown values. For example: show information about <b>migration</b> instead of <b>age</b>
+        </p>
+        <a href="https://www.statistik.at/atlas/?mapid=them_bevoelkerung_staatsangehoerigkeit&layerid=layer1&sublayerid=sublayer0&languageid=1&bbox=1516321,5884841,1839496,6050557,9" target="_blank">
+          <img data-id="STATatlas-animation" src="img/STATatlas/foreigners.png" class="screenshot" alt="">
+        </a>
+      </section>
+      <section id="monitor" data-auto-animate data-auto-animate-id="monitor">
+        <p>
+          the <a href="https://monitor.statistik.at">Economic Trend Monitor</a> includes interactive <b>time series</b> which are updated weekly
+        </p>
+        <img data-id="monitor-animation" src="img/monitor/chart.png" class="screenshot" alt="">
+      </section>
+      <section id="monitor-tooltip" data-auto-animate data-auto-animate-id="monitor">
+        <p>
+          <b>Hovering</b> over the chart will show a <b>tooltip</b> with values for the coressponding time
+        </p>
+        <img data-id="monitor-animation" src="img/monitor/tooltip.png" class="screenshot" alt="">
+      </section>
+      <section id="monitor-zoom" data-auto-animate data-auto-animate-id="monitor">
+        <p>
+          The <b>handle</b> at the bottom of the chart can be used to <b>zoom</b> out and show a larger timespan of values
+        </p>
+        <img data-id="monitor-animation" src="img/monitor/zoom.png" class="screenshot" alt="">
+      </section>
+      <section id="monitor-sort" data-auto-animate data-auto-animate-id="monitor">
+        <p>
+          The table can be <b>sorted</b> by clicking on one of the header cells. Example: Sort descending with respect to revenue
+        </p>
+        <img data-id="monitor-animation" src="img/monitor/sort.png" class="screenshot" alt="">
+      </section>
+      <section id="flows" data-auto-animate data-auto-animate-id="flows">
+        <p>
+          This <a href="https://kreislaufwirtschaft.statistik.at">Material Flows 2019</a> include a tailor-made <b>sankey diagram</b>
+        </p>
+        <img data-id="flows-animation" src="img/flows/chart.png" class="screenshot" alt="">
+      </section>
+      <section id="flows-tooltip" data-auto-animate data-auto-animate-id="flows">
+        <p>
+          When the <b>mouse</b> is pointed to a node, it shows a <b>tooltip</b> with details
+        </p>
+        <img data-id="flows-animation" src="img/flows/tooltip.png" class="screenshot" alt="">
+      </section>
+      <section id="flows-modal" data-auto-animate data-auto-animate-id="flows">
+        <p>
+          <b>Clicking</b> on a node shows a <b>modal</b> with a definition
+        </p>
+        <img data-id="flows-animation" src="img/flows/modal.png" class="screenshot" alt="">
+      </section>
+    </section>
+    <section id='future'>
+      <section id="changes">
+        <h2>So what's new?</h2>
+        <p>
+          Going forward, <a>Statistics Austria</a> will include <b>C&Ts</b> in website articles. This was not possible on our old website becuase of technical constraints
+        </p>
+        <p>
+          Whenever interactive <b>C&T</b> were used, they were hosted on a seperate page and linked from the articles
+        </p>
+      </section>
+      <section id="website-current">
+        <p>For comparison: An article of the <b>current</b> webpage</p>
+        <img src="img/website/current.png" class="screenshot" alt="">
+      </section>
+      <section id="website-new">
+        <p>The landing page for the <b>new</b> webpage</p>
+        <img src="img/website/landingpage.PNG" class="screenshot" alt="">
+      </section>
+      <section id="website-atlas">
+        <p>An article with an embedded <b>STATatlas</b> map</p>
+        <img src="img/website/ITGS Atlas.PNG" class="screenshot" alt="">
+      </section>
+      <section id="website-table">
+        <p>An article with an embedded interactive <b>table</b></p>
+        <img src="img/website/ITGS Table.PNG" class="screenshot" alt="">
+      </section>
+    </section>
+    <section>
+      <section id="app">
+        <h2>Creating interactive components</h2>
+        <p>
+          Being able to embed <b>C&Ts</b> is great, but the question remains how they can be produced on a large scale
+        </p>
+        <p>
+          We decided to develop a <b>C&T builder</b> web application, which allows article authors to generate <b>C&Ts</b> via a graphical user interface
+        </p>
+        <p>
+          All generated <b>C&Ts</b> follow our <b>corporate design</b> and produce <b>accessible</b>, <b>responsive</b> and <b>interactive</b> web components
+        </p>
+      </section>
+      <section id="app-tmeseries" section data-auto-animate data-auto-animate-id="app-ts">
+        <p>The <b>C&T builder</b> provides a chart <b>preview</b> on the right and a GUI to customize the chart on the left</p>
+        <img data-id="app-ts-img" src="img/app/ts.png" class="screenshot" alt="">
+      </section>
+      <section id="app-tooltip" data-auto-animate data-auto-animate-id="app-ts">
+        <p>The <b>preview</b> on the right supports interactions like <b>tooltips</b> which are also available on the website</p>
+        <img data-id="app-ts-img" src="img/app/tooltip.png" class="screenshot" alt="">
+      </section>
+      <section id="app-change-y" data-auto-animate data-auto-animate-id="app-ts">
+        <p>On the left, article authors can customize their charts. For example: change the variable on the <b>y-Axis</b></p>
+        <img data-id="app-ts-img" src="img/app/picker_y.png" class="screenshot" alt="">
+      </section>
+      <section id="app-changed-y" data-auto-animate data-auto-animate-id="app-ts">
+        <p>On the left, article authors can customize their charts. For example: change the variable on the <b>y-Axis</b></p> 
+        <img data-id="app-ts-img" src="img/app/changed_y.png" class="screenshot" alt="">
+      </section>
+      <section id="app-bar">
+        <p>It is also possible to switch to another chart type. Currently, <b>bar charts</b>, <b>time sereies</b> and <b>scatterplots</b> are supported</p>
+        <img src="img/app/bar.png" class="screenshot" alt="">
+      </section>
+      <section id="app-table" data-auto-animate data-auto-animate-id="app-table">
+        <p>Interactive <b>tables</b> can be created in a similar fashion</p>
+        <img data-id="app-table-img" src="img/app/table.png" class="screenshot" alt="">
+      </section>
+      <section id="app-table-paging" data-auto-animate data-auto-animate-id="app-table">
+        <p>The table shows 5 entries per <b>page</b></p>
+        <img data-id="app-table-img" src="img/app/table_page2.png" class="screenshot" alt="">
+      </section>
+      <section id="app-table-searching" data-auto-animate data-auto-animate-id="app-table">
+        <p>Search strings can be used to <b>filter</b> the data</p>
+        <img data-id="app-table-img" src="img/app/table_search.png" class="screenshot" alt="">
+      </section>
+      <section id="app-table-sorting" data-auto-animate data-auto-animate-id="app-table">
+        <p>Tables can be <b>sorted</b> by clicking on a table header</p>
+        <img data-id="app-table-img" src="img/app/table_sorted.png" class="screenshot" alt="">
+      </section>
+      <section id="app-technologies">
+        <h2>How it works</h2>
+        <div>
+          <img src="img/logos/highcharts.svg" style="width: 100px; height: 100px; vertical-align:middle;" alt="" srcset="">
+          <span style="display: inline-block; width: 800px; margin-left: 25px; vertical-align: middle;">
+            The charts are generated with the JavaScript package <a href="https://www.highcharts.com/">highcharts</a>, which supports zoomable charts, tooltips and more out of the box
+          </span>
+        </div>
+        <div style="margin-top: 20px;">
+          <img src="img/logos/datatables.png" style="width: 100px; height: 100px; vertical-align:middle;" alt="" srcset="">
+          <span style="display: inline-block; width: 800px; margin-left: 25px; vertical-align: middle;">
+            The tables are generated with the javascript package <a href="https://datatables.net/">datatables</a>, which supports searchable and sortable tables 
+          </span>
+        </div>
+        <div>
+          <img src="img/logos/shiny.svg" style="width: 100px; height: 100px; vertical-align:middle;" alt="" srcset="">
+          <span style="display: inline-block; width: 800px; margin-left: 25px; vertical-align: middle;">
+            The <b>C&T builder</b> app was written with <a>shiny</a>, which is a web application framework for the <b>R language</b> 
+          </span>
+        </div>
+      </section>
+    </section>
+    <section>
+      <section id="import">
+        <h2>Data Import</h2>
+        There are two options for importing data in the <b>C&T builder</b> app
+        <ul class="stat" style="margin-top: 25px; margin-bottom: 35px; display: block;">
+          <li><a>STATcube</a> data can be imported via a <b>REST API</b></li>
+          <li>Data from the <a href="https://data.statistik.gv.at">open.data portal</a> is parsed from csv files</li>
+        </ul>
+        The import logic is implemented in the R package <a>STATcubeR</a>, which is <b>open source</b> and available via github
+        <p style="margin-left: 15px; line-height: 50px;"><i style=" margin-right: 10px;" class="fa-brands fa-github"></i> <a href="https://github.com/statistikat/STATcubeR">https://github.com/statistikat/STATcubeR</a> <!--<br/>
+             <i class="fas fa-globe"></i> <a>https://statistikat.github.io/STATcubeR</a> -->
+      </section>
+      <section id="CMS">
+        <h2>Combining Charts and Text</h2>
+        <div style = "margin-bottom: 30px;">
+          <i class="fab fa-typo3" style="font-size: 95px; color: hsl(32deg 100% 50%); vertical-align:middle;"></i> 
+          <span style="display: inline-block; width: 800px; margin-left: 25px; vertical-align: middle;">
+            Our website articles are written with  a content management system (<b>CMS</b>) called <a href="https://typo3.org/">TYPO3</a>
+          </span>
+        </div>
+        <div style = "margin-bottom: 25px;">
+          <i class="fas fa-database" style="font-size: 63px; vertical-align:middle; background-color: #0071bb; padding: 19px; color: white; border-radius: 50%;"></i> 
+          <span style="display: inline-block; width: 800px; margin-left: 25px; vertical-align: middle;">
+            <b>C&Ts</b> from the <b>C&T builder</b> app can exported into a database
+          </span>
+        </div>
+        <div>
+          <img src="img/logos/plumber.svg" style="max-width: 100px; height: 100px; vertical-align:middle;" alt="" srcset="">
+          <span style="display: inline-block; width: 800px; margin-left: 30px; vertical-align: middle;">
+              The <b>C&Ts</b> from the database can be imported by the <b>CMS</b> via a <b>REST API</b>, which was written with the <b>R</b> package <a href="https://www.rplumber.io/">plumber</a>
+          </span>
+        </div>
+      </section>
+      <section id="contributors">
+        <h2>Other Contributors</h2>
+        <div style="margin-top: 30px;">
+          <img src="img/logos/sass.svg" style="min-width: 120px; height: 110px; vertical-align:middle;" alt="" srcset="">
+          <span style="display: inline-block; width: 800px; margin-left: 25px; vertical-align: middle;">
+            The <b>stylings</b> were coordinated with the <b>front end developers</b> of our new website
+          </span>
+        </div>
+        <div style="margin-top: 10px;">
+          <i class="fas fa-user-group" style="font-size: 75px; vertical-align:middle; width: 120px;"></i> 
+          <span style="display: inline-block; width: 800px; margin-left: 25px; vertical-align: middle;">
+            New <b>features</b> are added continuously based on suggestions from our <b>article authors</b>
+          </span>
+        </div>
+        <div style="margin-top: 30px;">
+          <i class="fab fa-accessible-icon" style="width: 120px; font-size: 95px; vertical-align:middle;"></i> 
+          <span style="display: inline-block; width: 800px; margin-left: 25px; vertical-align: middle;">
+            Our <b>layout & design team</b> gives valuable feedback regarding <b>accessibility</b> and corporate design
+          </span>
+        </div>
+      </section>
+      <section id="summary">
+        <h2>Summary</h2>
+        <ul class="stat">
+          <li>The new webiste will launch in <b>June 2022</b></li>
+          <li>Website articles will contain interactive <b>charts and tables</b></li>
+          <li>A <b>C&T builder</b> app was developed so <b>article authors</b> can create C&Ts easily, quickliy and <b>consistently</b></li>
+          <li><b>Stay tuned</b> to see all this in action in a few weeks</li>
+        </ul>
+      </section>
+      <section id="thanks">
+        <h2 style="font-size: 3em;">Thank you very much for your attention!</h2>
+        <h3 style="font-size: 1.4em; color: hsl(0deg, 0%, 30%)">You saw: Behind the Scenes of Interactive Charts</h3>
+        <div class="presentation-info">
+          <div class="pi-item">
+            <i class="fa-solid fa-user"></i>
+            <a>Gregor de Cillia</a> from <a>Statistics Austria</a>
+          </div>
+          <div class="pi-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <a>Statistical Days 2022</a> at <a>TU Graz</a>
+          </div>
+          <div class="pi-item">
+            <i class="fa-brands fa-github"></i>
+            <a href='https://github.com/GregorDeCillia/StatisticalDays2022'>github.com/GregorDeCillia/StatisticalDays2022</a>
+          </div>
+        </div>
+      </section>
+    </section>
+  </div></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+  <script>
+    Reveal.initialize({
+      backgroundTransition: 'slide',
+      hash: true,
+      plugins: [  ]
+    });
+  </script>
+  <a href="https://www.github.com/GregorDeCillia/StatisticalDays2022" class="github-corner hide-pdf" aria-label="View source on GitHub"><svg width="120" height="120" id='octocat' viewBox="0 0 250 250" style="fill:var(--r-link-color); color:#fff; position: absolute; top: 0; border: 0; right: 0; transition: fill 1s; z-index: 5" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<script src='www/links.js'></script>
+</body>
+</html>

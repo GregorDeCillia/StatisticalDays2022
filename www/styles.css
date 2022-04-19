@@ -1,0 +1,76 @@
+:root {
+  --r-heading1-size: 2.8em;
+  --r-heading-text-transform: none;
+  --r-heading-letter-spacing: -0.02em;
+  --r-main-font-size: 34px;
+  --r-heading-color: rgb(60, 60, 60);
+  --r-main-color: rgb(60, 60, 60);
+  --r-heading2-size: 2em;
+}
+
+#title h1 {
+  line-height: 0.9;
+}
+
+.presentation-info {
+  font-size: .8em;
+  margin-top: 50px;
+  background: hsl(0deg 0% 95%);
+  width: fit-content;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.pi-item {
+  line-height: 40px;
+}
+
+.pi-item > i {
+  width: 30px;
+  text-align: center;
+}
+
+h1.subtitle {
+  font-size: 1.6em;
+  color: hsl(0deg 0% 30%)
+}
+
+b, strong {
+  color: #B0063D;
+}
+
+.reveal a {
+  font-weight: bold;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+ul.stat>::marker {
+  content: "⮚";
+}
+
+.stat li {
+  padding-inline-start: 1ch;
+}
+
+.print-pdf .hide-pdf {
+  display: none;
+}
+
+.screenshot {
+  max-height: 550px !important;
+  display: block;
+  margin: 10px auto !important;
+}
+
+.print-pdf .screenshot {
+  max-height: 550px;
+  display: block;
+  margin: 10px auto;
+}
+
+.github-corner:hover {
+  --r-link-color: #b0063d;
+}
