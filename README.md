@@ -25,3 +25,12 @@ The presentation will include sneak-peeks for the new webpage of Statistics Aust
 * official statistics
 * web application
 * open govenrnment data
+
+## Links
+
+* 🧊 STATcubeR: https://statistikat.github.io/STATcubeR
+* 🗺️ STATatlas: https://www.statistik.at/atlas/
+* ♻️ Material Flows 2019: https://kreislaufwirtschaft.statistik.at/kreislaufwirtschaft/en/
+* 🖥️ Economic Trend Monitor: https://monitor.statistik.at/
+* 🌞 shiny: https://shiny.rstudio.com/
+* 🧰 plumber: https://www.rplumber.io/
